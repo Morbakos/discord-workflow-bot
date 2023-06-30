@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum DiscordEvent {
+  MESSAGE_CREATED
+  MEMBER_JOINED
+}
+
+model WorkflowContext {
+  idWorkflowContext Int             @id @default(autoincrement())
+  guildId           String
+  idDiscordEvent    DiscordEvent
+  WorkflowTasks     WorkflowTasks[]
+}
+
+model WorkflowTasks {
+  idWorkflowTask    Int             @id @default(autoincrement())
+  idWorkflowContext Int
+  workflowContext   WorkflowContext @relation(fields: [idWorkflowContext], references: [idWorkflowContext])
+  idTaskExecutor    Int
+  taskExecutor      TaskExecutor    @relation(fields: [idTaskExecutor], references: [idTaskExecutor])
+  order Int
+  taskParameter Json @default("{}")
+}
+
+enum TaskExecutorClass {
+  create_channel
+}
+
+model TaskExecutor {
+  idTaskExecutor Int             @id @default(autoincrement())
+  executor       TaskExecutorClass
+  WorkflowTasks  WorkflowTasks[]
+}

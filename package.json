@@ -1,0 +1,45 @@
+{
+	"name": "discord-workflow-bot",
+	"version": "0.0.1",
+	"description": "Discord bot with automated workflow based on Discord event",
+	"main": "src/index.ts",
+	"scripts": {
+		"start": "npm run build; node dist/api.js",
+		"start:prod": "npm run build && node dist/src/index.js",
+		"dev": "nodemon src/index.ts",
+		"build": "tsc -p tsconfig.json",
+		"format": "eslint -c .eslintrc.json --fix"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Morbakos/discord-workflow-bot.git"
+	},
+	"keywords": [
+		"discordjs",
+		"discord-workflow-bot",
+		"discord",
+		"discord-bot"
+	],
+	"author": "Alexis Jacob A.K.A Gavin \"Morbakos\" Sertix",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Morbakos/discord-workflow-bot/issues"
+	},
+	"homepage": "https://github.com/Morbakos/discord-workflow-bot#readme",
+	"devDependencies": {
+		"@types/node": "^20.2.6",
+		"@typescript-eslint/eslint-plugin": "^5.59.9",
+		"@typescript-eslint/parser": "^5.59.9",
+		"nodemon": "^2.0.22",
+		"prisma": "^4.15.0",
+		"ts-node": "^10.9.1",
+		"typescript": "^5.1.3"
+	},
+	"dependencies": {
+		"@prisma/client": "^4.15.0",
+		"discord.js": "^14.11.0"
+	},
+	"prisma": {
+		"seed": "ts-node prisma\\seed.ts"
+	}
+}
